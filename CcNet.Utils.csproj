@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4BBAE8FD-F717-4114-8F50-B84D4F3D0336}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CcNet.Utils</RootNamespace>
+    <AssemblyName>CcNet.Utils</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>References\Interop.IWshRuntimeLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInitializer.cs" />
+    <Compile Include="Attributes\BaseValidationAttribute.cs" />
+    <Compile Include="Attributes\NumberValidationAttribute.cs" />
+    <Compile Include="Attributes\StringValidationAttribute.cs" />
+    <Compile Include="Attributes\ValidationType.cs" />
+    <Compile Include="Chars.cs" />
+    <Compile Include="CheckValidFlag.cs" />
+    <Compile Include="ComboxItem.cs" />
+    <Compile Include="Controls\CcAppearance.cs" />
+    <Compile Include="Controls\CcAppearances.cs" />
+    <Compile Include="Controls\CcBorder.cs" />
+    <Compile Include="Controls\CcButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CcDateTime.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CcProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CcTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CcTypeConverter.cs" />
+    <Compile Include="Controls\CtrlAssist.cs" />
+    <Compile Include="Controls\TagContext.cs" />
+    <Compile Include="CtrlDefines.cs" />
+    <Compile Include="CustomFormat.cs" />
+    <Compile Include="Events\CommonEventArgs.cs" />
+    <Compile Include="Events\ExportEventArgs.cs" />
+    <Compile Include="Events\LoadDataEventArgs.cs" />
+    <Compile Include="Events\PagerEventArgs.cs" />
+    <Compile Include="Extensions\BitExtension.cs" />
+    <Compile Include="Extensions\CollectionExtension.cs" />
+    <Compile Include="Extensions\ColorExtension.cs" />
+    <Compile Include="Extensions\ComboBoxExtension.cs" />
+    <Compile Include="Extensions\ComponentExtension.cs" />
+    <Compile Include="Extensions\ControlExtension.cs" />
+    <Compile Include="Extensions\DataRowExtension.cs" />
+    <Compile Include="Extensions\DataTableExtension.cs" />
+    <Compile Include="Extensions\DateTimeExtension.cs" />
+    <Compile Include="Extensions\EnumExtension.cs" />
+    <Compile Include="Extensions\ExceptionExtenion.cs" />
+    <Compile Include="Extensions\FormExtension.cs" />
+    <Compile Include="Extensions\GraphicsExtension.cs" />
+    <Compile Include="Extensions\IoExtension.cs" />
+    <Compile Include="Extensions\ObjectExtension.cs" />
+    <Compile Include="Extensions\RectangleExtenstion.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Extensions\TaskExtension.cs" />
+    <Compile Include="Extensions\TextBoxExtension.cs" />
+    <Compile Include="Forms\ImageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImageForm.Designer.cs">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MaskForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MaskForm.Designer.cs">
+      <DependentUpon>MaskForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OpacityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GridColumnDisplay.cs" />
+    <Compile Include="Helpers\AesHelper.cs" />
+    <Compile Include="Helpers\AssemblyHelper.cs" />
+    <Compile Include="Helpers\CmdLineArgsHelper.cs" />
+    <Compile Include="Helpers\ComputerHelper.cs" />
+    <Compile Include="Helpers\ConfigHelper.cs" />
+    <Compile Include="Helpers\Crc32.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="Helpers\FtpHelper.cs" />
+    <Compile Include="Helpers\HashHelper.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
+    <Compile Include="Helpers\InputHelper.cs" />
+    <Compile Include="Helpers\SecurityHelper.cs" />
+    <Compile Include="Helpers\ZipHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RegExpPatterns.cs" />
+    <Compile Include="SkinUtil.cs" />
+    <Compile Include="Win32.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\ImageForm.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="References\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="References\Interop.IWshRuntimeLibrary.dll" />
+    <Content Include="References\Newtonsoft.Json.dll" />
+    <Content Include="References\System.ValueTuple.dll" />
+    <Content Include="Resources\img_error.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
