@@ -14,28 +14,28 @@ namespace CcNet.Utils.Extensions
         /// <summary>
         /// 绑定数据
         /// </summary>
-        /// <typeparam name="TValue"></typeparam>
+        /// <typeparam name="object"></typeparam>
         /// <param name="cb"></param>
         /// <param name="items"></param>
-        public static void BindData<TValue>(this ComboBox cb, params TValue[] items)
-            => cb.BindData(items?.Select(x => new ComboxItem<TValue>(x, x.ToString())));
+        public static void BindData(this ComboBox cb, params object[] items)
+            => cb.BindData(items?.Select(x => new ComboxItem(x, x.ToString())));
 
         /// <summary>
         /// 绑定数据
         /// </summary>
-        /// <typeparam name="TValue"></typeparam>
+        /// <typeparam name="object"></typeparam>
         /// <param name="cb"></param>
         /// <param name="items"></param>
-        public static void BindData<TValue>(this ComboBox cb, Dictionary<TValue, string> items)
-            => cb.BindData(items?.Select(x => (ComboxItem<TValue>)x));
+        public static void BindData(this ComboBox cb, Dictionary<object, string> items)
+            => cb.BindData(items?.Select(x => (ComboxItem)x));
 
         /// <summary>
         /// 绑定数据
         /// </summary>
-        /// <typeparam name="TValue"></typeparam>
+        /// <typeparam name="object"></typeparam>
         /// <param name="cb"></param>
         /// <param name="items"></param>
-        public static void BindData<TValue>(this ComboBox cb, IEnumerable<ComboxItem<TValue>> items)
+        public static void BindData(this ComboBox cb, IEnumerable<ComboxItem> items)
         {
             if (null == cb || items.IsEmpty())
             {
@@ -54,18 +54,18 @@ namespace CcNet.Utils.Extensions
         /// </summary>
         /// <param name="cb"></param>
         /// <returns></returns>
-        public static List<ComboxItem<TValue>> GetItems<TValue>(this ComboBox cb)
+        public static List<ComboxItem> GetItems(this ComboBox cb)
         {
             if (null == cb)
             {
                 return null;
             }
 
-            var items = new List<ComboxItem<TValue>>();
+            var items = new List<ComboxItem>();
 
             foreach (var item in cb.Items)
             {
-                items.Add(item as ComboxItem<TValue>);
+                items.Add(item as ComboxItem);
             }
 
             return items;
@@ -76,14 +76,14 @@ namespace CcNet.Utils.Extensions
         /// </summary>
         /// <param name="cb"></param>
         /// <returns></returns>
-        public static ComboxItem<TValue> GetSelectedItem<TValue>(this ComboBox cb)
+        public static ComboxItem GetSelectedItem(this ComboBox cb)
         {
             if (null == cb || null == cb.SelectedItem)
             {
                 return null;
             }
 
-            return cb.SelectedItem as ComboxItem<TValue>;
+            return cb.SelectedItem as ComboxItem;
         }
 
         /// <summary>
@@ -91,31 +91,23 @@ namespace CcNet.Utils.Extensions
         /// </summary>
         /// <param name="cb"></param>
         /// <returns></returns>
-        public static TValue GetSelectedValue<TValue>(this ComboBox cb)
-        {
-            var item = cb.GetSelectedItem<TValue>();
-            if (item != null)
-            {
-                return item.Value;
-            }
-
-            return default(TValue);
-        }
+        public static object GetSelectedValue(this ComboBox cb)
+            => cb.GetSelectedItem()?.Value;
 
         /// <summary>
         /// 获取所选择的文本
         /// </summary>
         /// <param name="cb"></param>
         /// <returns></returns>
-        public static string GetSelectedText<TValue>(this ComboBox cb)
-            => cb.GetSelectedItem<TValue>()?.Text;
+        public static string GetSelectedText(this ComboBox cb)
+            => cb.GetSelectedItem()?.Text;
 
         /// <summary>
         /// 设置所选择的值
         /// </summary>
         /// <param name="cb"></param>
         /// <param name="value"></param>
-        public static void SetSelectedValue<TValue>(this ComboBox cb, object value)
+        public static void SetSelectedValue(this ComboBox cb, object value)
         {
             if (null == cb)
             {
@@ -133,7 +125,7 @@ namespace CcNet.Utils.Extensions
                 return;
             }
 
-            foreach (ComboxItem<TValue> item in cb.Items)
+            foreach (ComboxItem item in cb.Items)
             {
                 if (null == item)
                 {

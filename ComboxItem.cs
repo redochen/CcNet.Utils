@@ -7,20 +7,19 @@ namespace CcNet.Utils
     /// <summary>
     /// 下拉框item对象
     /// </summary>
-    /// <typeparam name="TValue"></typeparam>
-    public class ComboxItem<TValue>
+    public class ComboxItem
     {
         /// <summary>
         /// 绑定的值
         /// </summary>
-        public TValue Value { get; private set; }
+        public object Value { get; private set; }
 
         /// <summary>
         /// 显示的文本
         /// </summary>
         public string Text { get; private set; }
 
-        public ComboxItem(TValue value, string text)
+        public ComboxItem(object value, string text)
         {
             this.Value = value;
             this.Text = text;
@@ -30,15 +29,15 @@ namespace CcNet.Utils
         /// 赋值操作符
         /// </summary>
         /// <param name="pair"></param>
-        public static implicit operator ComboxItem<TValue>(KeyValuePair<TValue, string> pair)
-            => new ComboxItem<TValue>(pair.Key, pair.Value);
+        public static implicit operator ComboxItem(KeyValuePair<object, string> pair)
+            => new ComboxItem(pair.Key, pair.Value);
 
         /// <summary>
         /// 强制类型转换
         /// </summary>
         /// <param name="item"></param>
-        public static implicit operator KeyValuePair<TValue, string>(ComboxItem<TValue> item)
-            => new KeyValuePair<TValue, string>(item.Value, item.Text);
+        public static implicit operator KeyValuePair<object, string>(ComboxItem item)
+            => new KeyValuePair<object, string>(item.Value, item.Text);
 
         public override string ToString()
         {
@@ -51,7 +50,7 @@ namespace CcNet.Utils
         /// <param name="filter"></param>
         /// <param name="totalMatchText">文本全匹配或包括匹配</param>
         /// <returns></returns>
-        public bool IsMatch(ComboxItem<TValue> filter, bool totalMatchText)
+        public bool IsMatch(ComboxItem filter, bool totalMatchText)
         {
             if (null == filter)
             {
@@ -76,14 +75,14 @@ namespace CcNet.Utils
         /// </summary>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static List<ComboxItem<TValue>> FromValues(params TValue[] values)
+        public static List<ComboxItem> FromValues(params object[] values)
         {
             if (values.IsEmpty())
             {
                 return null;
             }
 
-            return values.Select(v => new ComboxItem<TValue>(v, string.Empty)).ToList();
+            return values.Select(v => new ComboxItem(v, string.Empty)).ToList();
         }
 
         /// <summary>
@@ -91,14 +90,14 @@ namespace CcNet.Utils
         /// </summary>
         /// <param name="texts"></param>
         /// <returns></returns>
-        public static List<ComboxItem<TValue>> FromTexts(params string[] texts)
+        public static List<ComboxItem> FromTexts(params string[] texts)
         {
             if (texts.IsEmpty())
             {
                 return null;
             }
 
-            return texts.Select(t => new ComboxItem<TValue>(default(TValue), t)).ToList();
+            return texts.Select(t => new ComboxItem(t, t)).ToList();
         }
     }
 }
