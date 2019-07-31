@@ -25,6 +25,11 @@ namespace CcNet.Utils.Extensions
 
             foreach (var member in members)
             {
+                if (!dataRow.Table.Columns.Contains(member.Name))
+                {
+                    continue;
+                }
+
                 var value = dataRow.GetValue(member.Name);
                 t.SetMemberValue(member, value);
             }
