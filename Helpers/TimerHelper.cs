@@ -21,12 +21,16 @@ namespace CcNet.Utils.Helpers
         {
             _Timer = new Timer
             {
-                Interval = interval,
+                Interval = enabled ? 1 : interval,
                 Tag = tag,
                 Enabled = enabled
             };
 
-            _Timer.Tick += (sender, e) => onTick();
+            _Timer.Tick += (sender, e) =>
+            {
+                _Timer.Interval = interval;
+                onTick();
+            };
         }
 
         /// <summary>
