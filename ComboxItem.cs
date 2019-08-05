@@ -83,7 +83,8 @@ namespace CcNet.Utils
                 return null;
             }
 
-            return values.Select(v => new ComboxItem(v, setTextAsValue ? v?.ToString() ?? string.Empty : string.Empty)).ToList();
+            return values.Select(v => new ComboxItem(v, setTextAsValue ?
+                v?.ToString() ?? string.Empty : string.Empty)).ToList();
         }
 
         /// <summary>

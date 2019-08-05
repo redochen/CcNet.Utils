@@ -18,7 +18,7 @@ namespace CcNet.Utils.Extensions
         /// <param name="cb"></param>
         /// <param name="items"></param>
         public static void BindData(this ComboBox cb, params object[] items)
-            => cb.BindData(items?.Select(x => new ComboxItem(x, x.ToString())));
+            => cb.BindData(ComboxItem.FromValues(true, items));
 
         /// <summary>
         /// 绑定数据
