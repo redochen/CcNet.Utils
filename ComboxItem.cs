@@ -97,7 +97,7 @@ namespace CcNet.Utils
                 return null;
             }
 
-            return texts.Select(t => new ComboxItem(t, t)).ToList();
+            return texts.Select(t => new ComboxItem(null, t)).ToList();
         }
     }
 }
