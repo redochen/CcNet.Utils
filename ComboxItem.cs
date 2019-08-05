@@ -73,31 +73,33 @@ namespace CcNet.Utils
         /// <summary>
         /// 根据值列表获取ComboxItem列表
         /// </summary>
+        /// <param name="setTextAsValue">是否将文本设置为值</param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static List<ComboxItem> FromValues(params object[] values)
+        public static List<ComboxItem> FromValues(bool setTextAsValue = true, params object[] values)
         {
             if (values.IsEmpty())
             {
                 return null;
             }
 
-            return values.Select(v => new ComboxItem(v, string.Empty)).ToList();
+            return values.Select(v => new ComboxItem(v, setTextAsValue ? v?.ToString() ?? string.Empty : string.Empty)).ToList();
         }
 
         /// <summary>
         /// 根据文本列表获取ComboxItem列表
         /// </summary>
+        /// <param name="setValueAsText">是否将值设置为文本</param>
         /// <param name="texts"></param>
         /// <returns></returns>
-        public static List<ComboxItem> FromTexts(params string[] texts)
+        public static List<ComboxItem> FromTexts(bool setValueAsText = true, params string[] texts)
         {
             if (texts.IsEmpty())
             {
                 return null;
             }
 
-            return texts.Select(t => new ComboxItem(null, t)).ToList();
+            return texts.Select(t => new ComboxItem(setValueAsText ? t : null, t)).ToList();
         }
     }
 }
