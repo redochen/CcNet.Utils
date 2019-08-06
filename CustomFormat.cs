@@ -555,20 +555,18 @@ namespace CcNet.Utils
 
                 var number = Convert.ChangeType(str, NumberType);
                 var fmt = GetFormatString(FormatFormat);
-                if (fmt.IsValid())
-                {
-                    var data = number.Invoke("ToString", new[] { fmt }, new Type[] { typeof(string) });
-                    if (!number.Equals(data))
-                    {
-                        ErrorInfos.Add($"最多只能输入 {GetReadableText(fmt)} 位小数");
-                    }
-
-                    return base.Format(data, false);
-                }
-                else
+                if (!fmt.IsValid())
                 {
                     return base.Format(value, false);
                 }
+
+                var data = number.Invoke("ToString", new[] { fmt }, new Type[] { typeof(string) });
+                if (!number.Equals(data))
+                {
+                    ErrorInfos.Add($"最多只能输入 {GetReadableText(fmt)} 位小数");
+                }
+
+                return base.Format(data, false);
             }
             catch (FormatException fe)
             {
@@ -663,6 +661,8 @@ namespace CcNet.Utils
                     {
                         ErrorInfos.Add($"只能输入小于或等于 {maxValue.Value} 的值");
                     }
+
+                    return number.ToString();
                 }
 
                 return base.Format(value, false);
@@ -748,6 +748,8 @@ namespace CcNet.Utils
                     {
                         ErrorInfos.Add($"只能输入小于或等于 {maxValue.Value} 的值");
                     }
+
+                    return number.ToString();
                 }
 
                 return base.Format(value, false);
