@@ -1296,7 +1296,7 @@ namespace CcNet.Utils.Extensions
 
             try
             {
-                var type = member.GetMemberType(retriveUnderlyingType: false);
+                var type = member.GetMemberType(out Type underlyingType);
                 if (null == type)
                 {
                     return false;
@@ -1309,32 +1309,16 @@ namespace CcNet.Utils.Extensions
 
                 if (null == value)
                 {
-                    if (type.IsValueType) //值类型
+                    if (typeof(string) == type || type.IsNullableType() || !type.IsValueType)
                     {
-                        value = type.CreateInstance();
-                        return member.SetMemberValue(obj, value);
+                        return member.SetMemberValue(obj, null);
                     }
-
-                    return member.SetMemberValue(obj, null);
                 }
 
-                if (value.GetType() != type)
-                {
-                    try
-                    {
-                        //value = Convert.ChangeType(value, type);
-                        value = TypeDescriptor.GetConverter(type).ConvertFromString(value.ToString());//创建对象
-                    }
-                    catch
-                    {
-                        //转换失败使用默认值
-                        value = type.CreateInstance();
-                    }
+                //转换值的类型
+                value = value.ChangeType(underlyingType, out string error);
 
-                    return member.SetMemberValue(obj, value);
-                }
-
-                if (type.IsValueType(true)) //值类型
+                if (type.IsValueType(stringAsValueType: true)) //值类型
                 {
                     return member.SetMemberValue(obj, value);
                 }
@@ -1342,7 +1326,7 @@ namespace CcNet.Utils.Extensions
                 var valueTemp = value.Clone(out bool handled);
                 if (!handled)
                 {
-                    valueTemp = type.CreateInstance();
+                    valueTemp = underlyingType.CreateInstance();
                     valueTemp.CopyValue(value, true, false);
                 }
 
@@ -1776,6 +1760,20 @@ namespace CcNet.Utils.Extensions
         /// <returns></returns>
         public static Type GetMemberType(this MemberInfo member, bool retriveUnderlyingType = false)
         {
+            var type = member.GetMemberType(out Type underlyingType);
+            return retriveUnderlyingType ? underlyingType : type;
+        }
+
+        /// <summary>
+        /// 获取成员的类型
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="underlyingType">根类型</param>
+        /// <returns></returns>
+        public static Type GetMemberType(this MemberInfo member, out Type underlyingType)
+        {
+            underlyingType = null;
+
             if (null == member)
             {
                 return null;
@@ -1796,9 +1794,13 @@ namespace CcNet.Utils.Extensions
                     break;
             }
 
-            if (retriveUnderlyingType && type.IsNullableType())
+            if (type.IsNullableType())
             {
-                return type.GetUnderlyingType();
+                underlyingType = type.GetUnderlyingType();
+            }
+            else
+            {
+                underlyingType = type;
             }
 
             return type;
